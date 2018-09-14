@@ -11,16 +11,21 @@ var ennemie7;
 var ennemie8;
 var ennemie9;
 var ennemie10;
-var vie;
+
 //accueil start game
 function startGame() {
 
-    vaisseau1 = new ObjectConstruct("images/vaisseau1.png", (document.body.clientWidth / 2) - 37, 550);
-    vies = new ObjectConstruct("images/coeur.png", 1300, 0);
-    vies = new ObjectConstruct("images/coeur.png", 1320, 0);
-    vies = new ObjectConstruct("images/coeur.png", 1340, 0);
-    userMissile = new ObjectConstruct("images/missile.png", 0, 0);
+    //var tir;
+    //tir = new sound("audios/fond_sonore.mp3");
+    //tir.play();
 
+        //Creation des coeurs de vie
+    var coeurs1 = new ObjectConstruct("images/coeurs.png", (document.body.clientWidth - 37), -1);
+    var coeurs2 = new ObjectConstruct("images/coeurs.png", (document.body.clientWidth - 57), -1);
+    var coeurs3 = new ObjectConstruct("images/coeurs.png", (document.body.clientWidth - 77), -1);
+
+    vaisseau1 = new ObjectConstruct("images/vaisseau1.png", (document.body.clientWidth / 2) - 37, 550);
+    userMissile = new ObjectConstruct("images/missile.png", 0, 0);
 
     userMissile.display = "none";
 
@@ -44,8 +49,7 @@ function startGame() {
 
     document.querySelector('#accueil').style.display = "none";
     document.querySelector('#score').style.display = "block";
-    document.querySelector('#score2').innerHTML = 0;
-    
+    document.querySelector('#score2').innerHTML = 0; 
 }
 
 //stop 
@@ -71,8 +75,13 @@ function victoiry() {
 function boardEvent(event) {
     //jouer en appuyant sur la touche entrée
     if(event.keyCode == 13) {
+        if(document.querySelector('#accueil').display == "none") {
+            location.reload();
+        }
+        else {
+            startGame();
+        }
         
-        startGame();
     }
 
     //tir missile
@@ -213,6 +222,7 @@ function shootMissile() {
     }
 }*/
 
+var vie = 0;
 
 //Collision entre vaisseau et alien
 function collisionWithAlien() {
@@ -239,6 +249,8 @@ function collisionWithAlien() {
     } 
 }
 
+
+
 // collision entre corps1(vaisseau ou missile) et alien
 function collision(corps1, alien) {
 
@@ -260,20 +272,8 @@ function moveEnnemiToRight(ennemi){
             ennemi.startAnimation( moveEnnemiToLeft, 20 );
         }
     }
-    
-    else 
-              document.querySelector('#vies').innerHTML = vie;
-    var vie=0;{
-        for (i = 1; i <= 3; i++) {
-           i==1;
-           if (score=+10) {
-            vie==i+1;
-           }
-           else{
-            stopGame();
-           }
-        }
-        
+    else {
+        stopGame();
     }
 }
   //deplacement des ennemies vers la gauche
